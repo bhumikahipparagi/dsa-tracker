@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, Legend,
+  PieChart, Pie, Cell, Legend, RadarChart, Radar, PolarGrid, PolarAngleAxis,
 } from 'recharts';
 import { Trophy, Clock, Zap, TrendingUp, AlertCircle, CheckCircle2, RotateCcw } from 'lucide-react';
 import { useStore } from '../../store/useStore';
@@ -85,6 +85,21 @@ export default function Dashboard() {
         return { id: p.id, name: sp?.name ?? p.id, solvedAt: p.solvedAt!, difficulty: sp?.difficulty ?? 'Easy' };
       });
 
+    // Time of day buckets (4 slots)
+    const timeOfDay = { Morning: 0, Afternoon: 0, Evening: 0, Night: 0 };
+    Object.values(userProblems).forEach((p) => {
+      p.sessions.forEach((sess) => {
+        const h = new Date(sess.startTime).getHours();
+        if (h >= 5 && h < 12) timeOfDay.Morning += sess.durationSeconds;
+        else if (h >= 12 && h < 17) timeOfDay.Afternoon += sess.durationSeconds;
+        else if (h >= 17 && h < 21) timeOfDay.Evening += sess.durationSeconds;
+        else timeOfDay.Night += sess.durationSeconds;
+      });
+    });
+    const timeOfDayData = Object.entries(timeOfDay).map(([slot, secs]) => ({
+      slot, minutes: Math.round(secs / 60),
+    }));
+
     // Hints usage stats
     const hintsUsedTotal = Object.values(userProblems).reduce((a, p) => a + p.hintsUsed.length, 0);
 
@@ -100,6 +115,7 @@ export default function Dashboard() {
       byDiff,
       byStep,
       dailyData,
+      timeOfDayData,
       recentSolved,
       hintsUsedTotal,
     };
@@ -210,6 +226,39 @@ export default function Dashboard() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Time of day */}
+      <div className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-xl p-4">
+        <h2 className="text-sm font-semibold text-white mb-1">When Do You Study?</h2>
+        <p className="text-xs text-slate-500 mb-4">Minutes spent by time of day</p>
+        {stats.timeOfDayData.every(d => d.minutes === 0) ? (
+          <p className="text-slate-600 text-sm text-center py-4">No sessions recorded yet.</p>
+        ) : (
+          <div className="grid grid-cols-4 gap-3">
+            {stats.timeOfDayData.map(({ slot, minutes }) => {
+              const maxMin = Math.max(...stats.timeOfDayData.map(d => d.minutes), 1);
+              const pct = Math.round((minutes / maxMin) * 100);
+              const slotEmoji: Record<string, string> = { Morning: '🌅', Afternoon: '☀️', Evening: '🌆', Night: '🌙' };
+              const slotColor: Record<string, string> = {
+                Morning: '#f59e0b', Afternoon: '#f97316', Evening: '#8b5cf6', Night: '#3b82f6',
+              };
+              return (
+                <div key={slot} className="text-center">
+                  <div className="text-xl mb-1">{slotEmoji[slot]}</div>
+                  <div className="h-20 bg-[#151515] rounded-lg relative overflow-hidden flex items-end">
+                    <div
+                      className="w-full rounded-t-md transition-all"
+                      style={{ height: `${pct}%`, minHeight: minutes > 0 ? 4 : 0, background: slotColor[slot] }}
+                    />
+                  </div>
+                  <div className="text-xs font-medium text-white mt-1">{minutes}m</div>
+                  <div className="text-xs text-slate-500">{slot}</div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* Recent solved */}
