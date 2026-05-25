@@ -32,7 +32,7 @@ function AddProblemModal({ divisionId, onClose }: { divisionId: string; onClose:
 
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
-      <div className="bg-[#1e1e1e] border border-[#333] rounded-xl w-full max-w-md p-5">
+      <div className="bg-[#141428] border border-[#2d2d52] rounded-xl w-full max-w-md p-5">
         <div className="flex justify-between items-center mb-4">
           <h3 className="font-semibold text-white">Add Custom Problem</h3>
           <button onClick={onClose} className="text-slate-500 hover:text-white"><X size={18} /></button>
@@ -40,10 +40,10 @@ function AddProblemModal({ divisionId, onClose }: { divisionId: string; onClose:
         <div className="space-y-3">
           <input value={name} onChange={(e) => setName(e.target.value)}
             placeholder="Problem name (e.g. Two Sum)" autoFocus
-            className="w-full bg-[#151515] border border-[#333] rounded-lg px-3 py-2 text-sm text-white placeholder-slate-600 outline-none focus:border-orange-500" />
+            className="w-full bg-[#10101e] border border-[#2d2d52] rounded-lg px-3 py-2 text-sm text-white placeholder-slate-600 outline-none focus:border-violet-500" />
           <textarea value={desc} onChange={(e) => setDesc(e.target.value)} rows={3}
             placeholder="Brief description (optional)"
-            className="w-full bg-[#151515] border border-[#333] rounded-lg px-3 py-2 text-sm text-white placeholder-slate-600 outline-none focus:border-orange-500 resize-none" />
+            className="w-full bg-[#10101e] border border-[#2d2d52] rounded-lg px-3 py-2 text-sm text-white placeholder-slate-600 outline-none focus:border-violet-500 resize-none" />
           <div className="flex gap-2">
             {(['Easy', 'Medium', 'Hard'] as const).map((d) => (
               <button key={d} onClick={() => setDiff(d)}
@@ -52,12 +52,12 @@ function AddProblemModal({ divisionId, onClose }: { divisionId: string; onClose:
                     ? d === 'Easy' ? 'bg-green-500/20 border-green-500 text-green-400'
                       : d === 'Medium' ? 'bg-yellow-500/20 border-yellow-500 text-yellow-400'
                       : 'bg-red-500/20 border-red-500 text-red-400'
-                    : 'border-[#333] text-slate-500 hover:border-[#555]'
+                    : 'border-[#2d2d52] text-slate-500 hover:border-[#555]'
                 }`}>{d}</button>
             ))}
           </div>
           <button onClick={handleAdd}
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg text-sm font-medium transition-colors">
+            className="w-full bg-violet-500 hover:bg-violet-600 text-white py-2 rounded-lg text-sm font-medium transition-colors">
             Open Problem →
           </button>
         </div>
@@ -95,15 +95,15 @@ function SuggestedProblems({ divisionId, stepId }: { divisionId: string; stepId:
   );
 
   return (
-    <div className="mt-2 bg-orange-500/5 border border-orange-500/20 rounded-lg p-3">
-      <div className="flex items-center gap-1.5 text-xs text-orange-400 font-medium mb-2">
+    <div className="mt-2 bg-violet-500/5 border border-violet-500/20 rounded-lg p-3">
+      <div className="flex items-center gap-1.5 text-xs text-violet-400 font-medium mb-2">
         <Sparkles size={12} />
         Theory done! Start practicing these:
       </div>
       <div className="grid grid-cols-2 gap-2">
         {suggestions.map((p) => (
           <button key={p.id} onClick={() => navigate(`/problem/${p.id}`)}
-            className="flex items-start gap-2 text-left px-2.5 py-2 bg-[#1e1e1e] hover:bg-[#252525] border border-[#333] rounded-lg transition-colors group">
+            className="flex items-start gap-2 text-left px-2.5 py-2 bg-[#141428] hover:bg-[#252525] border border-[#2d2d52] rounded-lg transition-colors group">
             <Circle size={12} className="text-slate-600 mt-0.5 shrink-0" />
             <div className="min-w-0">
               <div className="text-xs text-slate-200 truncate group-hover:text-white">{p.name}</div>
@@ -133,7 +133,7 @@ function ProblemRow({ problem, userStatus }: { problem: SheetProblem; userStatus
         {problem.leetcodeUrl && (
           <a href={problem.leetcodeUrl} target="_blank" rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="text-xs text-orange-400 hover:underline">LC</a>
+            className="text-xs text-violet-400 hover:underline">LC</a>
         )}
         {problem.gfgUrl && (
           <a href={problem.gfgUrl} target="_blank" rel="noopener noreferrer"
@@ -142,7 +142,7 @@ function ProblemRow({ problem, userStatus }: { problem: SheetProblem; userStatus
         )}
       </div>
       <span className={`text-xs shrink-0 ${DIFF_COLOR[problem.difficulty]}`}>{problem.difficulty}</span>
-      <Play size={13} className="text-slate-600 group-hover:text-orange-400 shrink-0" />
+      <Play size={13} className="text-slate-600 group-hover:text-violet-400 shrink-0" />
     </div>
   );
 }
@@ -166,7 +166,7 @@ function DivisionBlock({ divisionId, divisionName, stepId, isTheory, problems, c
   };
 
   return (
-    <div className="border border-[#2a2a2a] rounded-lg overflow-hidden mb-2">
+    <div className="border border-[#2a2a4e] rounded-lg overflow-hidden mb-2">
       {/* Division header */}
       <div className="flex items-center gap-3 px-4 py-3 bg-[#191919] cursor-pointer select-none"
         onClick={() => setOpen(!open)}>
@@ -179,7 +179,7 @@ function DivisionBlock({ divisionId, divisionName, stepId, isTheory, problems, c
             className={`flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full border transition-colors ${
               isDone
                 ? 'bg-green-500/15 border-green-500/40 text-green-400'
-                : 'border-[#333] text-slate-500 hover:border-orange-500 hover:text-orange-400'
+                : 'border-[#2d2d52] text-slate-500 hover:border-violet-500 hover:text-violet-400'
             }`}
           >
             {isDone ? <CheckCircle2 size={12} /> : <BookOpen size={12} />}
@@ -191,7 +191,7 @@ function DivisionBlock({ divisionId, divisionName, stepId, isTheory, problems, c
 
         <button
           onClick={(e) => { e.stopPropagation(); setAddModal(true); }}
-          className="text-slate-600 hover:text-orange-400 transition-colors ml-1"
+          className="text-slate-600 hover:text-violet-400 transition-colors ml-1"
           title="Add custom problem"
         ><Plus size={14} /></button>
       </div>
@@ -204,7 +204,7 @@ function DivisionBlock({ divisionId, divisionName, stepId, isTheory, problems, c
           ) : (
             <p className="text-xs text-slate-500 leading-relaxed">
               Study the theory for <strong className="text-slate-300">{divisionName}</strong>, then click
-              <strong className="text-orange-400"> "Mark Theory Done"</strong> above to unlock practice problem suggestions.
+              <strong className="text-violet-400"> "Mark Theory Done"</strong> above to unlock practice problem suggestions.
             </p>
           )}
         </div>
@@ -262,7 +262,7 @@ export default function SheetPage() {
           <input
             value={search} onChange={(e) => setSearch(e.target.value)}
             placeholder="Search problems..."
-            className="bg-[#1e1e1e] border border-[#333] rounded-lg pl-9 pr-8 py-2 text-sm text-white placeholder-slate-600 outline-none focus:border-orange-500 w-56"
+            className="bg-[#141428] border border-[#2d2d52] rounded-lg pl-9 pr-8 py-2 text-sm text-white placeholder-slate-600 outline-none focus:border-violet-500 w-56"
           />
           {search && (
             <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">
@@ -274,8 +274,8 @@ export default function SheetPage() {
 
       {/* Search results */}
       {filtered && (
-        <div className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-xl overflow-hidden">
-          <div className="px-4 py-2 border-b border-[#2a2a2a] text-xs text-slate-500">
+        <div className="bg-[#141428] border border-[#2a2a4e] rounded-xl overflow-hidden">
+          <div className="px-4 py-2 border-b border-[#2a2a4e] text-xs text-slate-500">
             {filtered.length} result{filtered.length !== 1 ? 's' : ''}
           </div>
           {filtered.length === 0 ? (
@@ -296,21 +296,21 @@ export default function SheetPage() {
         const pct = stepProblems.length ? Math.round((solved / stepProblems.length) * 100) : 0;
 
         return (
-          <div key={step.id} className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl overflow-hidden">
+          <div key={step.id} className="bg-[#141428] border border-[#2a2a4e] rounded-xl overflow-hidden">
             <button
               onClick={() => toggleStep(step.id)}
               className="w-full flex items-center gap-3 px-5 py-4 hover:bg-white/[0.03] transition-colors text-left"
             >
               {isOpen
-                ? <ChevronDown size={16} className="text-orange-400 shrink-0" />
+                ? <ChevronDown size={16} className="text-violet-400 shrink-0" />
                 : <ChevronRight size={16} className="text-slate-500 shrink-0" />}
-              <span className="text-xs font-bold text-orange-400 bg-orange-500/15 px-2 py-0.5 rounded-md shrink-0">
+              <span className="text-xs font-bold text-violet-400 bg-violet-500/15 px-2 py-0.5 rounded-md shrink-0">
                 Step {step.id}
               </span>
               <span className="flex-1 font-medium text-white">{step.name}</span>
               <span className="text-sm text-slate-400 shrink-0">{solved}/{stepProblems.length}</span>
-              <div className="w-24 h-1.5 bg-[#2a2a2a] rounded-full overflow-hidden ml-2 shrink-0">
-                <div className="h-full bg-orange-500 rounded-full transition-all" style={{ width: `${pct}%` }} />
+              <div className="w-24 h-1.5 bg-[#1e1e3a] rounded-full overflow-hidden ml-2 shrink-0">
+                <div className="h-full bg-violet-500 rounded-full transition-all" style={{ width: `${pct}%` }} />
               </div>
             </button>
 

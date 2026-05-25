@@ -33,14 +33,14 @@ export default function SettingsPage() {
       </div>
 
       {/* Judge0 API */}
-      <div className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-xl p-5 space-y-4">
+      <div className="bg-[#141428] border border-[#2a2a4e] rounded-xl p-5 space-y-4">
         <div className="flex items-start gap-3">
           <div className="flex-1">
             <h2 className="text-sm font-semibold text-white">Judge0 API (Code Execution)</h2>
             <p className="text-xs text-slate-500 mt-1">
               Get a free API key from{' '}
               <a href="https://rapidapi.com/judge0-official/api/judge0-ce" target="_blank" rel="noopener noreferrer"
-                className="text-orange-400 hover:underline inline-flex items-center gap-0.5">
+                className="text-violet-400 hover:underline inline-flex items-center gap-0.5">
                 RapidAPI <ExternalLink size={10} />
               </a>
               . Free tier: 50 requests/day.
@@ -55,7 +55,7 @@ export default function SettingsPage() {
               value={settings.judgeApiKey}
               onChange={(e) => updateSettings({ judgeApiKey: e.target.value })}
               placeholder="Paste your RapidAPI key here"
-              className="w-full bg-[#151515] border border-[#333] rounded-lg px-3 py-2 text-sm text-white placeholder-slate-600 outline-none focus:border-orange-500 pr-10"
+              className="w-full bg-[#10101e] border border-[#2d2d52] rounded-lg px-3 py-2 text-sm text-white placeholder-slate-600 outline-none focus:border-violet-500 pr-10"
             />
             <button onClick={() => setShowKey(!showKey)}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300">
@@ -68,7 +68,7 @@ export default function SettingsPage() {
           <input
             value={settings.judgeApiHost}
             onChange={(e) => updateSettings({ judgeApiHost: e.target.value })}
-            className="w-full bg-[#151515] border border-[#333] rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-orange-500"
+            className="w-full bg-[#10101e] border border-[#2d2d52] rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-violet-500"
           />
         </div>
         <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3 flex gap-2">
@@ -80,7 +80,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Editor */}
-      <div className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-xl p-5 space-y-4">
+      <div className="bg-[#141428] border border-[#2a2a4e] rounded-xl p-5 space-y-4">
         <h2 className="text-sm font-semibold text-white">Editor Preferences</h2>
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -89,14 +89,14 @@ export default function SettingsPage() {
               type="number" min={10} max={22}
               value={settings.editorFontSize}
               onChange={(e) => updateSettings({ editorFontSize: Number(e.target.value) })}
-              className="w-full bg-[#151515] border border-[#333] rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-orange-500"
+              className="w-full bg-[#10101e] border border-[#2d2d52] rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-violet-500"
             />
           </div>
           <div>
             <label className="text-xs text-slate-500 block mb-1.5">Line Numbers</label>
             <button onClick={() => updateSettings({ showLineNumbers: !settings.showLineNumbers })}
               className={`w-full py-2 rounded-lg text-sm border transition-colors ${
-                settings.showLineNumbers ? 'bg-orange-500/20 border-orange-500 text-orange-400' : 'border-[#333] text-slate-500'
+                settings.showLineNumbers ? 'bg-violet-500/20 border-violet-500 text-violet-400' : 'border-[#2d2d52] text-slate-500'
               }`}>{settings.showLineNumbers ? 'Enabled' : 'Disabled'}</button>
           </div>
         </div>
@@ -106,26 +106,26 @@ export default function SettingsPage() {
             <div className="text-xs text-slate-500">Saves code 1.5s after you stop typing</div>
           </div>
           <button onClick={() => updateSettings({ autoSave: !settings.autoSave })}
-            className={`w-12 h-6 rounded-full transition-colors relative ${settings.autoSave ? 'bg-orange-500' : 'bg-[#333]'}`}>
+            className={`w-12 h-6 rounded-full transition-colors relative ${settings.autoSave ? 'bg-violet-500' : 'bg-[#333]'}`}>
             <span className={`absolute top-0.5 w-5 h-5 bg-white rounded-full transition-all shadow ${settings.autoSave ? 'right-0.5' : 'left-0.5'}`} />
           </button>
         </div>
       </div>
 
       {/* Data management */}
-      <div className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-xl p-5 space-y-4">
+      <div className="bg-[#141428] border border-[#2a2a4e] rounded-xl p-5 space-y-4">
         <h2 className="text-sm font-semibold text-white">Data & Export</h2>
         <div className="grid grid-cols-2 gap-3">
           <button onClick={() => exportAllData(userProblems, conceptNotes)}
-            className="flex items-center gap-2 justify-center px-4 py-2.5 bg-[#151515] border border-[#333] hover:border-orange-500 text-slate-300 hover:text-white rounded-lg text-sm transition-colors">
+            className="flex items-center gap-2 justify-center px-4 py-2.5 bg-[#10101e] border border-[#2d2d52] hover:border-violet-500 text-slate-300 hover:text-white rounded-lg text-sm transition-colors">
             <Download size={14} />Export All (JSON)
           </button>
           <button onClick={() => exportCSV(userProblems)}
-            className="flex items-center gap-2 justify-center px-4 py-2.5 bg-[#151515] border border-[#333] hover:border-green-500 text-slate-300 hover:text-white rounded-lg text-sm transition-colors">
+            className="flex items-center gap-2 justify-center px-4 py-2.5 bg-[#10101e] border border-[#2d2d52] hover:border-green-500 text-slate-300 hover:text-white rounded-lg text-sm transition-colors">
             <Download size={14} />Export Stats (CSV)
           </button>
           <button onClick={() => fileRef.current?.click()}
-            className="flex items-center gap-2 justify-center px-4 py-2.5 bg-[#151515] border border-[#333] hover:border-blue-500 text-slate-300 hover:text-white rounded-lg text-sm transition-colors col-span-2">
+            className="flex items-center gap-2 justify-center px-4 py-2.5 bg-[#10101e] border border-[#2d2d52] hover:border-blue-500 text-slate-300 hover:text-white rounded-lg text-sm transition-colors col-span-2">
             <Upload size={14} />Import Backup (JSON)
           </button>
         </div>
@@ -133,9 +133,9 @@ export default function SettingsPage() {
         <input ref={fileRef} type="file" accept=".json" className="hidden"
           onChange={(e) => e.target.files?.[0] && handleImport(e.target.files[0])} />
 
-        <div className="border-t border-[#2a2a2a] pt-4">
+        <div className="border-t border-[#2a2a4e] pt-4">
           <div className="text-xs text-slate-500 mb-3">
-            All data is stored in your browser's localStorage under key <code className="text-orange-400">dsa-tracker-v1</code>.
+            All data is stored in your browser's localStorage under key <code className="text-violet-400">dsa-tracker-v1</code>.
             Export regularly to avoid data loss on browser clear.
           </div>
           <div className="text-xs text-slate-600">
@@ -145,7 +145,7 @@ export default function SettingsPage() {
       </div>
 
       <button onClick={save}
-        className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2.5 rounded-xl text-sm font-medium transition-colors flex items-center justify-center gap-2">
+        className="w-full bg-violet-500 hover:bg-violet-600 text-white py-2.5 rounded-xl text-sm font-medium transition-colors flex items-center justify-center gap-2">
         <Save size={14} />
         {saved ? '✓ Saved!' : 'Save Settings'}
       </button>

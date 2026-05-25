@@ -16,13 +16,13 @@ function StatCard({ icon: Icon, label, value, sub, color = 'orange' }: {
   icon: React.ElementType; label: string; value: string | number; sub?: string; color?: string;
 }) {
   const colorMap: Record<string, string> = {
-    orange: 'text-orange-400 bg-orange-500/10',
+    orange: 'text-violet-400 bg-violet-500/10',
     green: 'text-green-400 bg-green-500/10',
     blue: 'text-blue-400 bg-blue-500/10',
     yellow: 'text-yellow-400 bg-yellow-500/10',
   };
   return (
-    <div className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-xl p-4 flex gap-4 items-start">
+    <div className="bg-[#141428] border border-[#2a2a4e] rounded-xl p-4 flex gap-4 items-start">
       <div className={`p-2 rounded-lg ${colorMap[color]}`}>
         <Icon size={20} className={colorMap[color].split(' ')[0]} />
       </div>
@@ -149,7 +149,7 @@ export default function Dashboard() {
       {/* Charts row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Daily activity */}
-        <div className="lg:col-span-2 bg-[#1e1e1e] border border-[#2a2a2a] rounded-xl p-4">
+        <div className="lg:col-span-2 bg-[#141428] border border-[#2a2a4e] rounded-xl p-4">
           <h2 className="text-sm font-semibold text-white mb-4">Daily Time Spent (minutes)</h2>
           {stats.dailyData.length === 0 ? (
             <div className="flex items-center justify-center h-32 text-slate-600 text-sm">
@@ -161,15 +161,15 @@ export default function Dashboard() {
                 <XAxis dataKey="date" tick={{ fill: '#64748b', fontSize: 11 }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fill: '#64748b', fontSize: 11 }} axisLine={false} tickLine={false} />
                 <Tooltip contentStyle={{ background: '#1e1e1e', border: '1px solid #333', borderRadius: 8 }}
-                  labelStyle={{ color: '#e2e8f0' }} itemStyle={{ color: '#f97316' }} />
-                <Bar dataKey="minutes" fill="#f97316" radius={[4, 4, 0, 0]} />
+                  labelStyle={{ color: '#e2e8f0' }} itemStyle={{ color: '#a78bfa' }} />
+                <Bar dataKey="minutes" fill="#a78bfa" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}
         </div>
 
         {/* Difficulty breakdown */}
-        <div className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-xl p-4">
+        <div className="bg-[#141428] border border-[#2a2a4e] rounded-xl p-4">
           <h2 className="text-sm font-semibold text-white mb-4">By Difficulty</h2>
           <ResponsiveContainer width="100%" height={160}>
             <PieChart>
@@ -191,7 +191,7 @@ export default function Dashboard() {
                   <span style={{ color: DIFF_COLORS[diff] }}>{diff}</span>
                   <span className="text-slate-400">{solved}/{total}</span>
                 </div>
-                <div className="h-1 bg-[#2a2a2a] rounded">
+                <div className="h-1 bg-[#1e1e3a] rounded">
                   <div className="h-full rounded transition-all" style={{
                     width: `${total ? (solved / total) * 100 : 0}%`,
                     background: DIFF_COLORS[diff],
@@ -204,7 +204,7 @@ export default function Dashboard() {
       </div>
 
       {/* Step progress */}
-      <div className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-xl p-4">
+      <div className="bg-[#141428] border border-[#2a2a4e] rounded-xl p-4">
         <h2 className="text-sm font-semibold text-white mb-4">Progress by Step</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
           {stats.byStep.map((s, i) => (
@@ -229,7 +229,7 @@ export default function Dashboard() {
       </div>
 
       {/* Time of day */}
-      <div className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-xl p-4">
+      <div className="bg-[#141428] border border-[#2a2a4e] rounded-xl p-4">
         <h2 className="text-sm font-semibold text-white mb-1">When Do You Study?</h2>
         <p className="text-xs text-slate-500 mb-4">Minutes spent by time of day</p>
         {stats.timeOfDayData.every(d => d.minutes === 0) ? (
@@ -241,12 +241,12 @@ export default function Dashboard() {
               const pct = Math.round((minutes / maxMin) * 100);
               const slotEmoji: Record<string, string> = { Morning: '🌅', Afternoon: '☀️', Evening: '🌆', Night: '🌙' };
               const slotColor: Record<string, string> = {
-                Morning: '#f59e0b', Afternoon: '#f97316', Evening: '#8b5cf6', Night: '#3b82f6',
+                Morning: '#f59e0b', Afternoon: '#a78bfa', Evening: '#8b5cf6', Night: '#3b82f6',
               };
               return (
                 <div key={slot} className="text-center">
                   <div className="text-xl mb-1">{slotEmoji[slot]}</div>
-                  <div className="h-20 bg-[#151515] rounded-lg relative overflow-hidden flex items-end">
+                  <div className="h-20 bg-[#10101e] rounded-lg relative overflow-hidden flex items-end">
                     <div
                       className="w-full rounded-t-md transition-all"
                       style={{ height: `${pct}%`, minHeight: minutes > 0 ? 4 : 0, background: slotColor[slot] }}
@@ -262,7 +262,7 @@ export default function Dashboard() {
       </div>
 
       {/* Recent solved */}
-      <div className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-xl p-4">
+      <div className="bg-[#141428] border border-[#2a2a4e] rounded-xl p-4">
         <h2 className="text-sm font-semibold text-white mb-4">Recently Solved</h2>
         {stats.recentSolved.length === 0 ? (
           <p className="text-slate-600 text-sm">Solve your first problem to see it here!</p>
@@ -293,7 +293,7 @@ export default function Dashboard() {
 
       {/* Weakpoints */}
       {stats.byStep.some((s) => s.solved === 0 && s.total > 0) && (
-        <div className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-xl p-4">
+        <div className="bg-[#141428] border border-[#2a2a4e] rounded-xl p-4">
           <h2 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
             <AlertCircle size={15} className="text-yellow-500" />
             Not Started Yet

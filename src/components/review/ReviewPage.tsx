@@ -72,7 +72,7 @@ export default function ReviewPage() {
             const daysUntil = differenceInDays(dueDate, new Date());
             return (
               <div key={`${item.problemId}-${item.reviewNumber}-${i}`}
-                className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-xl px-4 py-3 flex items-center gap-4">
+                className="bg-[#141428] border border-[#2a2a4e] rounded-xl px-4 py-3 flex items-center gap-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-sm text-white font-medium truncate">{item.name}</span>
@@ -112,7 +112,7 @@ export default function ReviewPage() {
                 </div>
                 <div className="flex gap-2 shrink-0">
                   <button onClick={() => navigate(`/problem/${item.problemId}`)}
-                    className="flex items-center gap-1.5 text-xs px-3 py-1.5 bg-[#151515] border border-[#333] hover:border-orange-500 text-slate-400 hover:text-white rounded-lg transition-colors">
+                    className="flex items-center gap-1.5 text-xs px-3 py-1.5 bg-[#10101e] border border-[#2d2d52] hover:border-violet-500 text-slate-400 hover:text-white rounded-lg transition-colors">
                     <ArrowRight size={12} />
                     Solve
                   </button>
@@ -155,7 +155,7 @@ export default function ReviewPage() {
       </div>
 
       {items.length === 0 ? (
-        <div className="bg-[#1e1e1e] border border-[#2a2a2a] rounded-xl p-8 text-center">
+        <div className="bg-[#141428] border border-[#2a2a4e] rounded-xl p-8 text-center">
           <RotateCcw size={32} className="text-slate-600 mx-auto mb-3" />
           <p className="text-slate-400 text-sm">No problems in review queue yet.</p>
           <p className="text-slate-600 text-xs mt-1">Submit a problem and mark it solved to add it here.</p>

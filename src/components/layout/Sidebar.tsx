@@ -18,11 +18,11 @@ export default function Sidebar() {
   const pct = Math.round((solved / total) * 100);
 
   return (
-    <aside className="w-56 min-h-screen bg-[#141414] border-r border-[#2a2a2a] flex flex-col">
+    <aside className="w-56 min-h-screen bg-[#141414] border-r border-[#2a2a4e] flex flex-col">
       {/* Logo */}
-      <div className="px-4 py-5 border-b border-[#2a2a2a]">
+      <div className="px-4 py-5 border-b border-[#2a2a4e]">
         <div className="flex items-center gap-2">
-          <FlameIcon className="text-orange-500" size={22} />
+          <FlameIcon className="text-violet-500" size={22} />
           <span className="font-bold text-white text-sm tracking-wide">DSA Tracker</span>
         </div>
         <div className="mt-3">
@@ -30,9 +30,9 @@ export default function Sidebar() {
             <span>{solved}/{total} solved</span>
             <span>{pct}%</span>
           </div>
-          <div className="h-1.5 bg-[#2a2a2a] rounded-full overflow-hidden">
+          <div className="h-1.5 bg-[#1e1e3a] rounded-full overflow-hidden">
             <div
-              className="h-full bg-orange-500 rounded-full transition-all"
+              className="h-full bg-violet-500 rounded-full transition-all"
               style={{ width: `${pct}%` }}
             />
           </div>
@@ -49,7 +49,7 @@ export default function Sidebar() {
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
                 isActive
-                  ? 'bg-orange-500/15 text-orange-400 font-medium'
+                  ? 'bg-violet-500/15 text-violet-400 font-medium'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
               }`
             }
@@ -61,7 +61,7 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-[#2a2a2a] text-xs text-slate-600">
+      <div className="p-4 border-t border-[#2a2a4e] text-xs text-slate-600">
         <div className="flex items-center gap-1.5">
           <Code2 size={12} />
           Striver's A2Z Sheet
